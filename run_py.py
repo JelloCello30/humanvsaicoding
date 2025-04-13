@@ -1,6 +1,5 @@
 from ecologits import EcoLogits
 from openai import OpenAI
-import google.generativeai as gemini
 import os
 import subprocess
 import sys
@@ -70,8 +69,8 @@ def read_input_output(folderName):
         f.close()
     return (inputs, expected_outputs)
 
-def init_chatgpt():
-    chatgpt = OpenAI(api_key="INSERT YOUR OPENAI KEY HERE!!!")
+def init_chatgpt(api_key):
+    chatgpt = OpenAI(api_key=api_key)
     return chatgpt
 
 def send_chatgpt_prompt(messages, client, trial, model):
@@ -155,7 +154,7 @@ model = sys.argv[2]
 if model == "":
     model = "gpt-4o"
 
-chatgpt = init_chatgpt()
+chatgpt = init_chatgpt(sys.argv[3])
 
 conversation_history = [
         {"role": "system", "content": "You are a world-class programmer for computer science olympiad competition."}
